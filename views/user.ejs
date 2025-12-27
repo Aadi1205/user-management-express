@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+
+    <link rel="stylesheet" href="/css/users.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>All Users</h1>
+
+        <form method="get" action="/user/new">
+            <button class="add-btn">+ Add User</button>
+        </form>
+    </div>
+
+    <% if (data.length === 0) { %>
+        <p class="empty">No users found.</p>
+    <% } else { %>
+
+        <table>
+    <thead>
+        <tr>
+            <th class="col-sr">#</th>
+            <th class="col-id">ID</th>
+            <th class="col-name">Username</th>
+            <th class="col-email">Email</th>
+            <th class="col-action">Edit</th>
+            <th class="col-action">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach((user, index) => { %>
+            <tr>
+                <td class="col-sr"><%= index + 1 %></td>
+                <td class="col-id"><%= user.id %></td>
+                <td class="col-name"><%= user.username %></td>
+                <td class="col-email"><%= user.email %></td>
+                <td class="col-action">
+                    <form method="get" action="/user/<%= user.id %>/edit">
+                        <button class="edit-btn">Edit</button>
+                    </form>
+                </td>
+                <td class="col-action">
+                    <form method="get" action="/user/<%= user.id %>/remove">
+                        <button class="delete-btn">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+
+    <% } %>
+
+</div>
+
+</body>
+</html>
